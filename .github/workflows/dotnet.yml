@@ -32,7 +32,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
       
     - name: Build (.NET Framework)
-      run: msbuild DuoVia.FuzzyStrings.sln /p:Configuration=Release /p:TargetFramework=net462
+      run: msbuild DuoVia.FuzzyStrings.sln /p:Configuration=Release /p:TargetFramework=net462 /v:minimal
       
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
