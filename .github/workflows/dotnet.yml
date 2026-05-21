@@ -37,6 +37,11 @@ jobs:
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
 
+    - name: Verify paths
+      run: |
+        pwd
+        dir
+
     - name: Validate net462 output exists
       run: |
         if (-not (Test-Path "bin/Release/net462/*.dll")) {
