@@ -165,3 +165,7 @@ pip-log.txt
 /src/DuoVia.FuzzyStrings/.vs/DuoVia.FuzzyStrings/DesignTimeBuild
 /src/DuoVia.FuzzyStrings/.vs/DuoVia.FuzzyStrings/v16/TestStore/0/004.testlog
 /src/DuoVia.FuzzyStrings/.vs/DuoVia.FuzzyStrings/v16/TestStore/0/testlog.manifest
+
+# Visual Studio
+*.vsidx
+.vs

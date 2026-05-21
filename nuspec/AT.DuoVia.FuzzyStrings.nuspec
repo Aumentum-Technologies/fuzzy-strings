@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>AT.DuoVia.FuzzyStrings</id>
+    <version>.*</version>
+    <authors>Tyler Jensen</authors>
+    <owners>Tyler Jensen</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/tylerjensen/duovia-fuzzystrings</projectUrl>
+    <description>A Collection of Fuzzy String Algorithms for .NET. Partially derived from multiple open sources. See individual algorithm classes for attributions.</description>
+    <copyright>Tyler Jensen</copyright>
+    <tags>Fuzzy Strings Dice Coefficient Levenshtein LCS DoubleMetaphone</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework=".NETStandard2.0" />
+      <group targetFramework=".NETStandard2.1" />
+    </dependencies>
+  </metadata>
+</package>

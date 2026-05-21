@@ -19,10 +19,15 @@ jobs:
         
     steps:
     - uses: actions/checkout@v4
+  
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+
+    - name: Setup NuGet CLI
+      run: dotnet tool install -g NuGet.CommandLine
+
         
     - name: Restore dependencies
       run: dotnet restore
@@ -34,32 +39,37 @@ jobs:
     #  run: dotnet test --no-build --verbosity normal
 
     
-    # ✅ Set version dynamically
+    # Set version dynamically
     - name: Set version
       id: version
       run: |
+        SHORT_SHA=$(git rev-parse --short HEAD)
         if [ "${{ github.event_name }}" = "pull_request" ]; then
-          echo "VERSION=1.0.${{ github.run_number }}-pr${{ github.event.pull_request.number }}-${{ github.sha }}" >> $GITHUB_ENV
+          echo "VERSION=2.1.${{ github.run_number }}-pr${{ github.event.pull_request.number }}-${SHORT_SHA}" >> $GITHUB_ENV
         else
-          echo "VERSION=1.0.${{ github.run_number }}-${{ github.sha }}" >> $GITHUB_ENV
+          echo "VERSION=2.1.${{ github.run_number }}-${SHORT_SHA}" >> $GITHUB_ENV
         fi
 
-    # Pack with versioning + symbols
-    - name: Pack
-      run: |
-        dotnet pack --no-build --configuration Release \
-          -o ../../nupkgs \
-          -p:Version=${VERSION} \
-          -p:IncludeSymbols=true \
-          -p:SymbolPackageFormat=snupkg
     
-    # Upload both .nupkg and .snupkg
-    - name: Upload NuGet packages
-      uses: actions/upload-artifact@v4
-      with:
-        name: nuget-packages
-        path: |
-          nupkgs/*.nupkg
-          nupkgs/*.snupkg
+    # ✅ Stage compliant package structure
+    - name: Prepare package layout
+      run: |
+        mkdir -p ../../package/lib/netstandard2.0
 
+        # Copy compiled DLLs
+        cp bin/Release/netstandard2.0/*.dll ../../package/lib/netstandard2.0/
+        cp bin/Release/netstandard2.0/*.xml ../../package/lib/netstandard2.0/ || true
 
+        # Copy nuspec
+        cp ../../nuspec/AT.DuoVia.FuzzyStrings.nuspec ../../package/
+
+    # ✅ Inject version into nuspec
+    - name: Update nuspec version
+      run: |
+        sed -i "s/<version>.*<\/version>/<version>${VERSION}<\/version>/" ../../package/AT.DuoVia.FuzzyStrings.nuspec
+
+    # ✅ Pack using nuspec (NOT dotnet pack)
+    - name: Create NuGet package
+      run: |
+        cd ../../package
+        nuget pack AT.DuoVia.FuzzyStrings.nuspec -OutputDirectory ../nupkgs
