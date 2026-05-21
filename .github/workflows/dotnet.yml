@@ -28,8 +28,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
+    - name: Build (.NET Framework)
+      run: msbuild /p:Configuration=Release
       
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
