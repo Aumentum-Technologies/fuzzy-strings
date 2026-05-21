@@ -27,6 +27,9 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
       
     - name: Build (.NET Framework)
       run: msbuild /p:Configuration=Release
