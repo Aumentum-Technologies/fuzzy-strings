@@ -13,8 +13,6 @@
     <tags>Fuzzy Strings Dice Coefficient Levenshtein LCS DoubleMetaphone</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.6.2" />
-      <group targetFramework=".NETStandard2.0" />
-      <group targetFramework=".NETStandard2.1" />
     </dependencies>
   </metadata>
   <files>
