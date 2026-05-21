@@ -37,6 +37,12 @@ jobs:
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
 
+    - name: Validate net462 output exists
+      run: |
+        if (-not (Test-Path "bin/Release/net462/*.dll")) {
+          Write-Error "net462 build output missing"
+          exit 1
+        }
     
     # Set version dynamically
     - name: Set version
@@ -52,20 +58,20 @@ jobs:
 
         echo "VERSION=$version" >> $env:GITHUB_ENV
     
-    # ✅ Stage compliant package structure
+    # Stage compliant package structure
     - name: Prepare package layout
       run: |
         New-Item -ItemType Directory -Force -Path ../../package/lib/net462
 
         # Copy compiled DLLs
-        Copy-Item bin/Release/net462/*.dll ../../package/lib/net462/ -ErrorAction SilentlyContinue
-        Copy-Item bin/Release/net462/*.xml ../../package/lib/net462/ -ErrorAction SilentlyContinue
+        Copy-Item bin/Release/net462/*.dll ../../package/lib/net462/
+        Copy-Item bin/Release/net462/*.xml ../../package/lib/net462/
 
 
         # Copy nuspec
         Copy-Item ../../nuspec/AT.DuoVia.FuzzyStrings.nuspec ../../package/
 
-    # ✅ Inject version into nuspec
+    # Inject version into nuspec
     - name: Update nuspec version
       run: |
         (Get-Content ../../package/AT.DuoVia.FuzzyStrings.nuspec) `
@@ -77,7 +83,7 @@ jobs:
         cd ../../package
         dir -Recurse
 
-    # ✅ Pack using nuspec (NOT dotnet pack)
+    # Pack using nuspec (NOT dotnet pack)
     - name: Create NuGet package
       run: |
         cd ../../package
