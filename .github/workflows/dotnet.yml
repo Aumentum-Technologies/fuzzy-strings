@@ -69,6 +69,10 @@ jobs:
           -replace '<version>.*</version>', "<version>$env:VERSION</version>" |
           Set-Content ../../package/AT.DuoVia.FuzzyStrings.nuspec
 
+    - name: Debug package contents
+      run: |
+        cd ../../package
+        dir -Recurse
 
     # ✅ Pack using nuspec (NOT dotnet pack)
     - name: Create NuGet package
