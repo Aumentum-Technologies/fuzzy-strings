@@ -24,10 +24,6 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-
-    - name: Setup NuGet CLI
-      run: dotnet tool install -g NuGet.CommandLine
-
         
     - name: Restore dependencies
       run: dotnet restore
