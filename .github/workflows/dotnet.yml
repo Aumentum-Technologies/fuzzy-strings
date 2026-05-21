@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     defaults:
       run:
@@ -43,30 +43,36 @@ jobs:
     - name: Set version
       id: version
       run: |
-        SHORT_SHA=$(git rev-parse --short HEAD)
-        if [ "${{ github.event_name }}" = "pull_request" ]; then
-          echo "VERSION=2.1.${{ github.run_number }}-pr${{ github.event.pull_request.number }}-${SHORT_SHA}" >> $GITHUB_ENV
-        else
-          echo "VERSION=2.1.${{ github.run_number }}-${SHORT_SHA}" >> $GITHUB_ENV
-        fi
+        $shortSha = git rev-parse --short HEAD
 
+        if ("${{ github.event_name }}" -eq "pull_request") {
+          $version = "1.0.${{ github.run_number }}-pr${{ github.event.pull_request.number }}-$shortSha"
+        } else {
+          $version = "1.0.${{ github.run_number }}-$shortSha"
+        }
+
+        echo "VERSION=$version" >> $env:GITHUB_ENV
     
     # ✅ Stage compliant package structure
     - name: Prepare package layout
       run: |
-        mkdir -p ../../package/lib/netstandard2.0
+        New-Item -ItemType Directory -Force -Path ../../package/lib/net462
 
         # Copy compiled DLLs
-        cp bin/Release/netstandard2.0/*.dll ../../package/lib/netstandard2.0/
-        cp bin/Release/netstandard2.0/*.xml ../../package/lib/netstandard2.0/ || true
+        Copy-Item bin/Release/net462/*.dll ../../package/lib/net462/ -ErrorAction SilentlyContinue
+        Copy-Item bin/Release/net462/*.xml ../../package/lib/net462/ -ErrorAction SilentlyContinue
+
 
         # Copy nuspec
-        cp ../../nuspec/AT.DuoVia.FuzzyStrings.nuspec ../../package/
+        Copy-Item ../../nuspec/AT.DuoVia.FuzzyStrings.nuspec ../../package/
 
     # ✅ Inject version into nuspec
     - name: Update nuspec version
       run: |
-        sed -i "s/<version>.*<\/version>/<version>${VERSION}<\/version>/" ../../package/AT.DuoVia.FuzzyStrings.nuspec
+        (Get-Content ../../package/AT.DuoVia.FuzzyStrings.nuspec) `
+          -replace '<version>.*</version>', "<version>$env:VERSION</version>" |
+          Set-Content ../../package/AT.DuoVia.FuzzyStrings.nuspec
+
 
     # ✅ Pack using nuspec (NOT dotnet pack)
     - name: Create NuGet package
