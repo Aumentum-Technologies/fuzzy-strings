@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuoVia.FuzzyStrings", "DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj", "{29385A2D-EAC1-4777-BC01-C060C2002307}"
 EndProject
@@ -16,6 +16,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{9125B1A1-FFFB-44EB-8214-7F110D4287BF}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\nuspec\AT.DuoVia.FuzzyStrings.nuspec = ..\..\nuspec\AT.DuoVia.FuzzyStrings.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{441E8BE8-FFE9-4B9C-B8DC-6841AEA2CFB5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Tools\install.ps1 = ..\..\Tools\install.ps1
+		..\..\Tools\uninstall.ps1 = ..\..\Tools\uninstall.ps1
 	EndProjectSection
 EndProject
 Global
@@ -56,6 +62,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9125B1A1-FFFB-44EB-8214-7F110D4287BF} = {D1FE470F-BB40-4A26-9721-23B8D5BB3C77}
+		{441E8BE8-FFE9-4B9C-B8DC-6841AEA2CFB5} = {D1FE470F-BB40-4A26-9721-23B8D5BB3C77}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A50F0CC-0BFF-4262-A85B-DFEF10C5DB9E}

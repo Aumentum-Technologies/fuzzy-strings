@@ -53,11 +53,14 @@ jobs:
     - name: Prepare package layout
       run: |
         New-Item -ItemType Directory -Force -Path ../../package/lib/net462
+        New-Item -ItemType Directory -Force -Path ../../package/Tools
 
         # Copy compiled DLLs
         Copy-Item DuoVia.FuzzyStrings/bin/Release/net462/*.dll ../../package/lib/net462/
         Copy-Item DuoVia.FuzzyStrings/bin/Release/net462/*.xml ../../package/lib/net462/
 
+        # Copy Tools
+        Copy-Item ../../Tools/*.ps1 ../../package/Tools/
 
         # Copy nuspec
         Copy-Item ../../nuspec/AT.DuoVia.FuzzyStrings.nuspec ../../package/
