@@ -6,7 +6,6 @@
     <authors>Tyler Jensen</authors>
     <owners>Tyler Jensen</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <description>A Collection of Fuzzy String Algorithms for .NET. Partially derived from multiple open sources. See individual algorithm classes for attributions.</description>
     <copyright>Tyler Jensen</copyright>
     <tags>Fuzzy Strings Dice Coefficient Levenshtein LCS DoubleMetaphone</tags>
