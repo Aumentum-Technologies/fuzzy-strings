@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuoVia.FuzzyStrings", "DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj", "{29385A2D-EAC1-4777-BC01-C060C2002307}"
 EndProject
@@ -9,8 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DuoVia.FuzzyStringsTests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1FE470F-BB40-4A26-9721-23B8D5BB3C77}"
 	ProjectSection(SolutionItems) = preProject
-		License.txt = License.txt
+		..\..\License.txt = ..\..\License.txt
 		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{9125B1A1-FFFB-44EB-8214-7F110D4287BF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\nuspec\AT.DuoVia.FuzzyStrings.nuspec = ..\..\nuspec\AT.DuoVia.FuzzyStrings.nuspec
 	EndProjectSection
 EndProject
 Global
@@ -48,6 +53,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9125B1A1-FFFB-44EB-8214-7F110D4287BF} = {D1FE470F-BB40-4A26-9721-23B8D5BB3C77}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A50F0CC-0BFF-4262-A85B-DFEF10C5DB9E}

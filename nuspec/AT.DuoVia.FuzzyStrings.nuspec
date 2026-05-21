@@ -17,4 +17,7 @@
       <group targetFramework=".NETStandard2.1" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="lib\net462\**\*.*" target="lib\net462" />
+  </files>
 </package>
