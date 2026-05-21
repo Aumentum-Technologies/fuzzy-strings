@@ -44,7 +44,7 @@ jobs:
 
     - name: Validate net462 output exists
       run: |
-        if (-not (Test-Path "bin/Release/net462/*.dll")) {
+        if (-not (Test-Path "DuoVia.FuzzyStrings/bin/Release/net462/*.dll")) {
           Write-Error "net462 build output missing"
           exit 1
         }
@@ -69,8 +69,8 @@ jobs:
         New-Item -ItemType Directory -Force -Path ../../package/lib/net462
 
         # Copy compiled DLLs
-        Copy-Item bin/Release/net462/*.dll ../../package/lib/net462/
-        Copy-Item bin/Release/net462/*.xml ../../package/lib/net462/
+        Copy-Item DuoVia.FuzzyStrings/bin/Release/net462/*.dll ../../package/lib/net462/
+        Copy-Item DuoVia.FuzzyStrings/bin/Release/net462/*.xml ../../package/lib/net462/
 
 
         # Copy nuspec
